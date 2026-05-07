@@ -1,42 +1,37 @@
 #include <cstddef>
 #include <cstdlib>
 #include <string.h>
+#include "Task.h"
 
 
-class Task {
 
-    public:
-        char name[20] ;
-        char desc[100] ;
-        bool status ;
-        Task(const char* name , const char* desc , bool status){
+
+
+        Task::Task(const char* name , const char* desc , bool status){
             strcpy(this->name, name) ;
             strcpy(this->desc, desc) ;
             this->status = status ;
         }
 
 
-};
 
 
-class TaskQueue {
-    private:
-      Task** Queue;
-      size_t size ;
 
-    public :
-        TaskQueue(){
+
+
+
+        TaskQueue::TaskQueue(){
             this->size = 0 ;
             this->Queue = NULL;
         }
-        size_t getSize(){
+        size_t TaskQueue::getSize(){
             return this->size ;
         }
-        Task** getTasks(){
+        Task** TaskQueue::getTasks(){
             return this->Queue;
         }
 
-        int addTask( const char* name ,  const char* des , bool status){
+        int TaskQueue::addTask( const char* name ,  const char* des , bool status){
             //allocate memory for the taskQueue
             this->size+=1;
             size_t size= this->size * sizeof(Task*) ;
@@ -49,7 +44,7 @@ class TaskQueue {
 
         }
 
-        int DelTask(size_t index){
+        int TaskQueue::DelTask(size_t index){
             delete this->Queue[index] ;
             for(int i = 0 ; i<this->size ; i++){
                 if(i>index)this->Queue[i-1] = this->Queue[i];
@@ -59,9 +54,6 @@ class TaskQueue {
             return 0;
         }
 
-        Task GetTask(size_t index){
+        Task TaskQueue::GetTask(size_t index){
             return *(this->Queue[index]);
         }
-
-
-};
