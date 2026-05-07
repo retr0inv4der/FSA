@@ -2,13 +2,6 @@
 #include <ncurses.h>
 #include "../models/Task.h"
 
-// #define KEY_UP 10
-// #define KEY_DOWN 11
-// #define KEY_LEFT 12
-// #define KEY_RIGHT 13
-// #define KEY_ENTER 14
-
-
 
 
 class NcursesManager{
@@ -41,14 +34,18 @@ class NcursesManager{
         }
 };
 
-
-
 class Menu{
     public:
     /*
      section 0 = TaskSection
+
+     selected = 0 -> task section
+     selected = 1 -> timer section
      */
         int section = 0 ;
+        bool entered =false  ;
+        int selected ;
+        bool running = true;
         NcursesManager manager = NcursesManager();
 
         Menu(){
@@ -60,63 +57,116 @@ class Menu{
             keypad(stdscr, TRUE);
             noecho() ;
         }
-        ~Menu(){
+        void sh(){
             if(manager.isInitialized()){
                 manager.shutdown();
             }
             std::cout<< "destructor is called \n"  ;
         }
         void print_menu(){
+            // TODO : implement your own blinking animation.
+
             move(0,0);
             printw("-------FSA-------\n");
             if(this->section == 0 ){
-                attron(A_BLINK) ;
+                attron(A_BLINK | A_BOLD) ;
                 printw("     >Tasks<\n");
-                attroff(A_BLINK);
-                printw("     >Timer<\n");
+                attroff(A_BLINK | A_BOLD);
+                printw("      Timer \n");
             }
             else if (this->section == 1 ) {
-                printw("     >Tasks<\n");
-                attron(A_BLINK) ;
+                printw("      Tasks\n");
+                attron(A_BLINK  | A_BOLD) ;
                 printw("     >Timer<\n");
-                attroff(A_BLINK) ;
+                attroff(A_BLINK| A_BOLD) ;
             }
             refresh();
         }
 
         void handle_key(int ch ){
             switch (ch) {
+                case 'q':
+                    this->running = false;
+                    break;
+
                 case  KEY_UP :
-                    if(section != 0){
+                    if(this->section != 0){
                         this->section = 0;
                     }
                     break ;
+
                 case KEY_DOWN :
-                    if(section != 1) {
+                    if(this->section != 1) {
                         this->section = 1 ;
                     }
                     break;
+
+                case '\n' :
+                    this->entered = true ;
+                    this->selected = this->section ;
+                    break ;
             }
+
 
         }
 
 
-        void mainloop(){
+        int mainloop(){
             int ch ;
             this->print_menu();
 
-            while((ch = getch()) != 'q'){
+            while(this->running){
+                ch = getch();
                 this->handle_key(ch);
-                this->print_menu();
+                if(this->entered){
+                    //return the page number to the window manager
+                    break;
+                }
 
+                this->print_menu();
+            }
+
+            if(entered){
+                this->entered = false;
+                return this->selected;
+            }
+            return 999;
+        }
+};
+class window_handler{
+    private:
+    /*
+     * windows = 0 --> main menu
+     * window = 1 -->  timer menu
+     *
+     */
+        int window = 0 ;
+
+    public:
+        void menu_main_loop(){
+            Menu menu = Menu();
+            int window ;
+            window = menu.mainloop();
+            menu.sh() ;
+            std::cout << "[DEBUG] SIGNAL TO WIN:" << window  << std::endl;
+        }
+
+
+        void start(){
+            switch(this->window){
+                case 0 :
+                this->menu_main_loop();
 
             }
         }
+
+
 };
 
 
-int main(){ // just for debugging
-    Menu menu = Menu() ;
-    menu.mainloop();
 
+
+int main(){ // just for debugging
+    window_handler winHanlder ;
+    winHanlder.start();
 }
