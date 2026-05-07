@@ -1,15 +1,6 @@
-
-class NcursesManager{
-    private:
-        bool isInit =0  ;
-
-    public:
-        NcursesManager();
-        bool isInitialized();
-        int init();
-        int shutdown();
-};
-
+#ifndef MENU_H
+#define MENU_H
+#include "../NcManager/NcManager.h"
 class Menu{
     public:
     /*
@@ -22,7 +13,7 @@ class Menu{
     bool entered =false  ;
     int selected ;
     bool running = true;
-    NcursesManager manager = NcursesManager();;
+    NcursesManager manager = NcursesManager();
 
         Menu();
         void sh();
@@ -30,3 +21,4 @@ class Menu{
         void handle_key(int ch );
         int mainloop();
 };
+#endif

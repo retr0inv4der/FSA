@@ -3,38 +3,6 @@
 #include "menu.h"
 
 
-        NcursesManager::NcursesManager(){
-            initscr();
-            this->isInit = true;
-        }
-        bool NcursesManager::isInitialized(){return this->isInit ;}
-
-        int NcursesManager::init(){
-             if(!isInit){
-                 initscr();
-                 this->isInit = true;
-                 return 0;
-             }
-             return -1 ;
-        }
-
-        int NcursesManager::shutdown(){
-            if(isInit){
-                endwin();
-                this->isInit = false ;
-                return 0 ;
-            }
-            return -1 ;
-        }
-
-
-
-    /*
-     section 0 = TaskSection
-
-     selected = 0 -> task section
-     selected = 1 -> timer section
-     */
 
 
 
@@ -43,7 +11,7 @@
                 std::cout << "constructor is called \n\n" ;
                 manager.init();
 
-            }
+            } // TODO : I THINK WE DONT NEED THIS
             keypad(stdscr, TRUE);
             noecho() ;
         }

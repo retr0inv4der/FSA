@@ -11,7 +11,6 @@ class Task {
         bool status ;
         Task(const char* name , const char* desc , bool status);
 
-
 };
 
 
