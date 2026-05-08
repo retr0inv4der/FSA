@@ -16,9 +16,10 @@
             noecho() ;
         }
         void Menu::sh(){
-            if(manager.isInitialized()){
-                manager.shutdown();
-            }
+            //if(manager.isInitialized()){
+                //manager.shutdown();
+            //}
+            clear(); 
             std::cout<< "destructor is called \n"  ;
         }
 

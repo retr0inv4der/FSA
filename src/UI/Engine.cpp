@@ -3,37 +3,36 @@
 #include "./menu/menu.h"
 #include "./tasks/taskpage.h"
 #include "../models/Task.h"
+#include "NcManager/NcManager.h"
 
 class window_handler{
     private:
     /*
-     * windows = 0 --> main menu / Timer
+     * window = -1 --> main menu
+     * windows = 0 -->   Timer
      * window = 1 -->  Task menu
      *
      */
-        int window = 0 ;
+        int window = -1 ;
 
     public:
         void main_loop(){
-            //TEST
-            TaskQueue tasks = TaskQueue() ;
-            tasks.addTask("task1" , "sex in yard", false) ;
-            tasks.addTask("task2" , "sex in yard", false) ;
 
 
             bool running = true;
             Menu menu  = Menu() ;
             TaskTab task_tab ;
+            task_tab.addTask("task1" , "sex in yard", false) ;
             while(running){
                 switch (this->window) {
-                    case 0 :
+                    case -1 :
 
                         this->window = menu.mainloop();
                         menu.sh();
                         break;
 
-                    case 1 :
-                    this->window =task_tab.print_TaskList(&tasks) ;
+                    case 0 :
+                        this->window =task_tab.main_loop(&task_tab);
                         break;
                     case 999:
                         running = false;
@@ -45,7 +44,7 @@ class window_handler{
 
         void start(){
             switch(this->window){
-                case 0 :
+                case -1 :
                 this->main_loop();
 
             }
@@ -57,7 +56,10 @@ class window_handler{
 
 
 
-int main(){ // just for debugging
+int main(){ 
+    NcursesManager ncmanager = NcursesManager(); 
+    // just for debugging
     window_handler winHanlder ;
     winHanlder.start();
+    ncmanager.shutdown(); 
 }
