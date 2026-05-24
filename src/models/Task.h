@@ -16,8 +16,8 @@ class Task {
 
 class TaskQueue {
     private:
-      Task** Queue;
-      size_t size ;
+        Task** Queue;
+        size_t size ;
 
     public :
         TaskQueue();

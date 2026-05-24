@@ -21,18 +21,20 @@ class window_handler{
 
             bool running = true;
             Menu menu  = Menu() ;
-            TaskTab task_tab ;
+            TaskTab task_tab  ;
             task_tab.addTask("task1" , "sex in yard", false) ;
+            task_tab.addTask("task2" , "MOVE YO FUCKING ASS", false) ;
             while(running){
                 switch (this->window) {
                     case -1 :
 
                         this->window = menu.mainloop();
-                        menu.sh();
+                        menu.sh(); // shutdown 
                         break;
 
                     case 0 :
                         this->window =task_tab.main_loop(&task_tab);
+
                         break;
                     case 999:
                         running = false;
