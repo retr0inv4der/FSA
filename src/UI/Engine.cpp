@@ -24,7 +24,7 @@ class window_handler{
                 switch (this->window) {
                     case -1 :
                         this->window = menu.mainloop();
-                        menu.sh(); // shutdown
+                        //menu.sh(); // shutdown
                         break;
                     case 0 :
                         this->window =task_tab.main_loop(&task_tab);

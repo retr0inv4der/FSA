@@ -12,7 +12,7 @@ class Menu{
         */
         int section = 0 ;
         bool entered =false  ;
-        int selected ;
+        int selected  = 1;
         bool running = true;
         NcursesManager manager = NcursesManager();
         Menu();
@@ -20,6 +20,7 @@ class Menu{
         void print_menu();
         void handle_key(int ch );
         int mainloop();
+        void reset_state();
 };
 
 #endif

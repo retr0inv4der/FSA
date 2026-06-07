@@ -67,11 +67,14 @@ void Menu::handle_key(int ch ){
 
 int Menu::mainloop(){
     int ch ;
+    this->reset_state();
+
     this->print_menu();
     while(this->running){
         ch = getch();
         this->handle_key(ch);
         this->print_menu();
+
     }
 
     if(entered){
@@ -79,4 +82,13 @@ int Menu::mainloop(){
         return this->selected;
     }
     return 999;
+}
+
+
+void Menu::reset_state(){
+    this->section = 0;
+    this->selected = 1;
+    this->entered = false;
+    this->running = true;
+
 }

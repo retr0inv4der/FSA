@@ -39,13 +39,17 @@ int TaskTab::print_status(){
 int TaskTab::handle_key(int ch) {
     switch (ch) {
         case 'q' :
+            this->running = false;
             return -1 ; // return back to the menu
             break;
         case KEY_UP :
             if(this->selected > 0) this->selected -=1;
+            return 999;
             break ;
         case KEY_DOWN :
             if(this->selected < this->getSize()-1) this->selected+=1 ;
+            return 999;
+            break;
     }
     return 0 ;
 }
