@@ -5,10 +5,9 @@ class NcursesManager {
     private:
         static inline bool isInit = 0 ;
 
-        public:
+    public:
         NcursesManager();
         bool isInitialized();
-
         int init();
         int shutdown();
 };

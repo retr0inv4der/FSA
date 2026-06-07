@@ -1,4 +1,3 @@
-
 class window_handler{
     private:
     /*

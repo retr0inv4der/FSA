@@ -4,37 +4,31 @@
 #include <cerrno>
 #include <cstring>
 #include <cstdio>
-#include <cstdlib> 
+#include <cstdlib>
 #include <fcntl.h>
 
 class storage : public TaskQueue  {
-  private: 
-    char* db  ;   
+    private:
+        char* db;
 
-  public : 
-    storage(){
-        this-> db = (char*)malloc(100) ; 
-        strcpy(this->db,"db/storage.db");  
-    }
-    
-
-    int LoadFromDisk(){
-        
-    }
-
-
-    
-
-    int SaveToDisk(){ // returns the number of bytes written 
-        FILE* file = fopen(this->db ,"w") ;       
-        
-        int n = fwrite(this->getTasks(),  sizeof(Task),this->getSize(),file );
-        if(n==-1){
-            std::cout<<errno   ; 
-            exit(1 ) ; 
+    public :
+        storage(){
+            this-> db = (char*)malloc(100) ;
+            strcpy(this->db,"db/storage.db");
         }
 
-    }
+        int LoadFromDisk(){
+            return 0;
+        }
 
+        int SaveToDisk(){ // returns the number of bytes written
+            FILE* file = fopen(this->db ,"w") ;
 
+            int n = fwrite(this->getTasks(),  sizeof(Task),this->getSize(),file );
+            if(n==-1){
+                std::cout<<errno   ;
+                exit(1 ) ;
+            }
+            return n;
+        }
 };
