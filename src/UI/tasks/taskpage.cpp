@@ -29,6 +29,12 @@ int TaskTab::print_TaskDes() {
     return 0 ; 
 }
 
+int TaskTab::print_status(){
+    move(0 , 34) ;
+    printw("--- status ---\n");
+    move(1,34) ;
+    return 0 ; 
+}
 
 int TaskTab::handle_key(int ch) {
     switch (ch) {
@@ -51,6 +57,7 @@ int TaskTab::main_loop(TaskQueue* queue){
     while(this->running){
         this->print_TaskList( queue); 
         this->print_TaskDes();
+        this->print_status() ;
         ch = getch(); 
         if(this->handle_key(ch) == -1){
             return -1 ;

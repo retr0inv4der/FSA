@@ -14,5 +14,6 @@ class TaskTab  : public TaskQueue{
     int main_loop(TaskQueue* queue) ;
     int print_TaskList(TaskQueue* queue );
     int print_TaskDes() ; 
+    int print_status() ; 
 };
 #endif

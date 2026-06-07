@@ -29,7 +29,7 @@ class window_handler{
                     case -1 :
 
                         this->window = menu.mainloop();
-                        menu.sh(); // shutdown 
+                        menu.sh(); // shutdown
                         break;
 
                     case 0 :
@@ -58,10 +58,10 @@ class window_handler{
 
 
 
-int main(){ 
-    NcursesManager ncmanager = NcursesManager(); 
+int main(){
+    NcursesManager ncmanager = NcursesManager();
     // just for debugging
     window_handler winHanlder ;
     winHanlder.start();
-    ncmanager.shutdown(); 
+    ncmanager.shutdown();
 }
