@@ -10,10 +10,12 @@ class TaskTab  : public TaskQueue{
         static inline bool running = true ;
         NcursesManager manager = NcursesManager();//init the ncurses
         int handle_key(int ch) ;
-        int main_loop(TaskQueue* queue) ;
-        int print_TaskList(TaskQueue* queue );
+        int main_loop() ;
+        int print_TaskList();
         int print_TaskDes() ;
         int print_status() ;
+        void add_task_dialog();
+        void reset_states();
 };
 
 #endif

@@ -22,6 +22,7 @@ void Menu::sh(){
 }
 
 void Menu::print_menu(){
+	clear();
     // TODO : implement your own blinking animation.
     move(0,0);
     printw("-------FSA-------\n");

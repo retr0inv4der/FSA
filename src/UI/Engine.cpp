@@ -27,7 +27,7 @@ class window_handler{
                         //menu.sh(); // shutdown
                         break;
                     case 0 :
-                        this->window =task_tab.main_loop(&task_tab);
+                        this->window =task_tab.main_loop();
                         break;
                     case 999:
                         running = false;
